@@ -1,7 +1,7 @@
 # Bridging Hearts Bereavement Support Group
 ## Website Prototype — GitHub Repository
 **Date:** March 11, 2026
-**Prepared by:** Claude (Anthropic) in collaboration with Mike
+**Prepared by:** Claude (Anthropic) in collaboration with BYRNESZ
 
 ---
 
