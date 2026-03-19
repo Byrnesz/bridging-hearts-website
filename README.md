@@ -2,7 +2,7 @@
 ## Website Prototype — Responsive Edition
 
 **Date:** March 2026
-**Prepared by:** Claude (Anthropic) in collaboration with Mike
+**Prepared by:** Claude (Anthropic) in collaboration with Byrnesz
 
 ---
 
