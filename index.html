@@ -1257,42 +1257,236 @@ footer {
 }
 
 /* ══════════════════════════════════════
-   RESPONSIVE
+   MOBILE NAV — hamburger
 ══════════════════════════════════════ */
-@media (max-width: 900px) {
-  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
-  .hero-visual { display: none; }
-  .welcome-grid { grid-template-columns: 1fr; gap: 40px; }
-  .pillars-grid { grid-template-columns: 1fr; }
-  .groups-card { grid-template-columns: 1fr; gap: 32px; padding: 32px; }
-  .testimonials-grid { grid-template-columns: 1fr; }
-  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
-  .values-grid { grid-template-columns: 1fr; }
-  .resources-grid { grid-template-columns: 1fr; }
-  .donate-grid { grid-template-columns: 1fr; }
-  .contact-grid { grid-template-columns: 1fr; }
-  .who-grid { grid-template-columns: repeat(2, 1fr); }
-  .trust-inner { gap: 20px; }
-  .impact-tiers { flex-direction: column; align-items: center; }
-  nav .nav-links { display: none; }
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px; height: 40px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  border: none;
+  background: none;
+  flex-shrink: 0;
+  transition: background 0.2s;
 }
+.nav-hamburger:hover { background: var(--teal-pale); }
+.nav-hamburger span {
+  display: block;
+  width: 22px; height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-@media (max-width: 480px) {
-  .section { padding: 60px 20px; }
-  .page-hero { padding: 50px 20px; }
-  .hero-inner { padding: 50px 20px; }
-  .groups-full-card { padding: 28px 20px; }
-  .donate-form-card { padding: 28px 20px; }
-  .contact-form-card { padding: 28px 20px; }
-  .contact-info-card { padding: 28px 20px; }
-  .nav-inner { padding: 0 20px; }
-  .footer-top { grid-template-columns: 1fr; }
+/* Mobile nav drawer */
+.nav-mobile-drawer {
+  display: none;
+  position: fixed;
+  top: 70px; left: 0; right: 0;
+  background: rgba(250,248,244,0.98);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--rule);
+  box-shadow: var(--shadow-md);
+  z-index: 999;
+  padding: 16px 20px 24px;
+  flex-direction: column;
+  gap: 4px;
+}
+.nav-mobile-drawer.open { display: flex; }
+.nav-mobile-drawer a {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  text-decoration: none;
+  padding: 12px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: block;
+}
+.nav-mobile-drawer a:hover,
+.nav-mobile-drawer a.active-page {
+  background: var(--teal-pale);
+  color: var(--teal);
+}
+.nav-mobile-drawer .nav-donate-mobile {
+  background: var(--teal);
+  color: white !important;
+  text-align: center;
+  font-weight: 700 !important;
+  margin-top: 8px;
+  border-radius: 12px !important;
+}
+.nav-mobile-drawer .nav-donate-mobile:hover {
+  background: var(--teal-light) !important;
 }
 
 /* Active nav highlight */
 .nav-links a.active-page {
   color: var(--teal);
   background: var(--teal-pale);
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE — Tablet (≤ 900px)
+══════════════════════════════════════ */
+@media (max-width: 900px) {
+
+  /* Nav */
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .nav-inner { padding: 0 20px; }
+
+  /* Hero */
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 60px 24px 50px;
+    text-align: center;
+  }
+  .hero-visual { display: none; }
+  .hero-sub { max-width: 100%; margin-left: auto; margin-right: auto; }
+  .hero-buttons { justify-content: center; }
+  .hero-eyebrow { margin-left: auto; margin-right: auto; }
+
+  /* Trust strip */
+  .trust-strip { padding: 16px 20px; }
+  .trust-inner { gap: 14px; justify-content: flex-start; }
+  .trust-item { font-size: 12px; }
+
+  /* Sections */
+  .section { padding: 70px 24px; }
+  .section-inner { max-width: 100%; }
+  .page-hero { padding: 60px 24px; }
+
+  /* Welcome */
+  .welcome-grid { grid-template-columns: 1fr; gap: 40px; }
+
+  /* Pillars */
+  .pillars-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  /* Groups highlight */
+  .groups-card { grid-template-columns: 1fr; gap: 32px; padding: 36px 28px; }
+
+  /* Testimonials */
+  .testimonials-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  /* Values */
+  .values-grid { grid-template-columns: 1fr 1fr; }
+
+  /* Who grid */
+  .who-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Resources */
+  .resources-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  /* Donate & Contact */
+  .donate-grid { grid-template-columns: 1fr; gap: 32px; }
+  .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+
+  /* Impact */
+  .impact-tiers { gap: 12px; }
+  .impact-tier { min-width: 130px; }
+
+  /* Footer */
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+
+  /* Sticky button */
+  .sticky-help { bottom: 20px; right: 16px; padding: 11px 16px; font-size: 12.5px; }
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE — Mobile (≤ 600px)
+══════════════════════════════════════ */
+@media (max-width: 600px) {
+
+  /* Nav */
+  .nav-wordmark .tagline { display: none; }
+  .nav-wordmark .name { font-size: 16px; }
+
+  /* Hero */
+  .hero-inner { padding: 48px 16px 40px; }
+  .hero h1 { font-size: 36px; }
+  .hero-sub { font-size: 15px; }
+  .hero-buttons { flex-direction: column; gap: 10px; }
+  .hero-buttons .btn-primary,
+  .hero-buttons .btn-secondary { width: 100%; justify-content: center; }
+
+  /* Trust strip */
+  .trust-inner { flex-direction: column; align-items: flex-start; gap: 10px; }
+
+  /* Sections */
+  .section { padding: 52px 16px; }
+  .page-hero { padding: 44px 16px; }
+  .section-title { font-size: 30px; }
+
+  /* Pillars */
+  .pillars-grid { grid-template-columns: 1fr; }
+
+  /* Testimonials */
+  .testimonials-grid { grid-template-columns: 1fr; }
+
+  /* Values */
+  .values-grid { grid-template-columns: 1fr; }
+
+  /* Who grid */
+  .who-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  /* Resources */
+  .resources-grid { grid-template-columns: 1fr; }
+
+  /* Groups */
+  .groups-card { padding: 28px 18px; }
+  .groups-full-card { padding: 28px 18px; }
+
+  /* Donate */
+  .donate-form-card { padding: 28px 18px; }
+  .amount-grid { grid-template-columns: repeat(3, 1fr); }
+
+  /* Contact */
+  .contact-form-card { padding: 28px 18px; }
+  .contact-info-card { padding: 28px 18px; }
+
+  /* Impact tiers — horizontal scroll on very small screens */
+  .impact-tiers { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; padding-bottom: 8px; }
+  .impact-tier { flex-shrink: 0; min-width: 140px; }
+
+  /* Impact buttons */
+  .impact-buttons { flex-direction: column; gap: 10px; align-items: stretch; }
+  .impact-buttons .btn-white,
+  .impact-buttons .btn-outline-white { justify-content: center; }
+
+  /* Footer */
+  .footer-top { grid-template-columns: 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  footer { padding: 44px 16px 28px; }
+
+  /* Newsletter form in footer */
+  .newsletter-form { flex-direction: column; }
+  .newsletter-form button { width: 100%; padding: 11px; }
+
+  /* Sticky button — compact on mobile */
+  .sticky-help { bottom: 16px; right: 12px; padding: 10px 14px; font-size: 12px; gap: 6px; }
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE — Small Mobile (≤ 380px)
+══════════════════════════════════════ */
+@media (max-width: 380px) {
+  .hero h1 { font-size: 30px; }
+  .logo-icon { width: 30px; height: 30px; }
+  .who-grid { grid-template-columns: 1fr; }
+  .amount-grid { grid-template-columns: repeat(2, 1fr); }
+  .section-title { font-size: 26px; }
 }
 </style>
 </head>
@@ -1331,8 +1525,26 @@ footer {
       <a onclick="showPage('donate')" id="nav-donate-link" class="nav-donate">Donate</a>
       <a onclick="showPage('contact')" id="nav-contact">Contact</a>
     </div>
+
+    <!-- Hamburger (mobile only) -->
+    <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileNav()" aria-label="Open navigation menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </div>
 </nav>
+
+<!-- Mobile drawer -->
+<div class="nav-mobile-drawer" id="nav-mobile-drawer">
+  <a onclick="showPage('home');closeMobileNav()"  id="mnav-home">Home</a>
+  <a onclick="showPage('about');closeMobileNav()" id="mnav-about">About</a>
+  <a onclick="showPage('groups');closeMobileNav()" id="mnav-groups">Support Groups</a>
+  <a onclick="showPage('resources');closeMobileNav()" id="mnav-resources">Resources</a>
+  <a onclick="showPage('involved');closeMobileNav()" id="mnav-involved">Get Involved</a>
+  <a onclick="showPage('contact');closeMobileNav()" id="mnav-contact">Contact</a>
+  <a onclick="showPage('donate');closeMobileNav()" id="mnav-donate" class="nav-donate-mobile">Donate</a>
+</div>
 
 <!-- ══════════════════════════════════════
      HOME PAGE
@@ -1960,6 +2172,34 @@ footer {
 
 <script>
 // ══════════════════════════════════════
+// MOBILE NAV
+// ══════════════════════════════════════
+window.toggleMobileNav = function() {
+  var drawer = document.getElementById('nav-mobile-drawer');
+  var burger = document.getElementById('nav-hamburger');
+  var isOpen = drawer.classList.contains('open');
+  drawer.classList.toggle('open');
+  burger.classList.toggle('open');
+  burger.setAttribute('aria-expanded', !isOpen);
+};
+
+window.closeMobileNav = function() {
+  document.getElementById('nav-mobile-drawer').classList.remove('open');
+  document.getElementById('nav-hamburger').classList.remove('open');
+};
+
+// Close mobile nav on outside click
+document.addEventListener('click', function(e) {
+  var drawer = document.getElementById('nav-mobile-drawer');
+  var burger = document.getElementById('nav-hamburger');
+  if (drawer && drawer.classList.contains('open')) {
+    if (!drawer.contains(e.target) && !burger.contains(e.target)) {
+      closeMobileNav();
+    }
+  }
+});
+
+// ══════════════════════════════════════
 // PAGE ROUTING
 // Declared on window so inline onclick attrs always resolve,
 // regardless of when/how the script executes.
@@ -1972,6 +2212,8 @@ window.showPage = function(id) {
     if (el) el.classList.remove('active');
     var navEl = document.getElementById('nav-' + (p === 'donate' ? 'donate-link' : p));
     if (navEl) navEl.classList.remove('active-page');
+    var mnavEl = document.getElementById('mnav-' + p);
+    if (mnavEl) mnavEl.classList.remove('active-page');
   });
 
   var target = document.getElementById('page-' + id);
@@ -1979,6 +2221,9 @@ window.showPage = function(id) {
 
   var navTarget = document.getElementById('nav-' + (id === 'donate' ? 'donate-link' : id));
   if (navTarget) navTarget.classList.add('active-page');
+
+  var mnavTarget = document.getElementById('mnav-' + id);
+  if (mnavTarget) mnavTarget.classList.add('active-page');
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
