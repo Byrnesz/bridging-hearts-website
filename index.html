@@ -1997,31 +1997,59 @@ footer {
       <div class="donate-grid">
         <div class="donate-form-card">
           <h3>Make a Gift Today</h3>
-          <p style="font-size: 14px; color: var(--ink-muted); margin-bottom: 22px;">Choose an amount or enter your own</p>
+          <p style="font-size: 14px; color: var(--ink-muted); margin-bottom: 22px;">Choose an amount — you'll be taken securely to PayPal to complete your gift.</p>
+
+          <!-- Amount selector -->
           <div class="amount-grid">
-            <button class="amount-btn selected" onclick="selectAmount(this)">$25</button>
-            <button class="amount-btn" onclick="selectAmount(this)">$50</button>
-            <button class="amount-btn" onclick="selectAmount(this)">$100</button>
-            <button class="amount-btn" onclick="selectAmount(this)">$250</button>
-            <button class="amount-btn" onclick="selectAmount(this)">$500</button>
-            <button class="amount-btn" onclick="selectAmount(this)">Other</button>
+            <button class="amount-btn selected" onclick="selectAmount(this)" data-amount="25">$25</button>
+            <button class="amount-btn" onclick="selectAmount(this)" data-amount="50">$50</button>
+            <button class="amount-btn" onclick="selectAmount(this)" data-amount="100">$100</button>
+            <button class="amount-btn" onclick="selectAmount(this)" data-amount="250">$250</button>
+            <button class="amount-btn" onclick="selectAmount(this)" data-amount="500">$500</button>
+            <button class="amount-btn" onclick="selectAmount(this)" data-amount="other">Other</button>
           </div>
-          <div class="form-group">
-            <label>First Name</label>
-            <input type="text" placeholder="Your first name">
+
+          <!-- Custom amount field — shown only when "Other" is selected -->
+          <div class="form-group" id="custom-amount-wrap" style="display:none; margin-top: 4px;">
+            <label>Enter Your Amount ($)</label>
+            <input type="number" id="custom-amount" min="1" step="1" placeholder="e.g. 75" style="font-size:16px;">
           </div>
-          <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" placeholder="Your last name">
+
+          <!-- PayPal form — styled as the site's own button -->
+          <form
+            id="paypal-donate-form"
+            action="https://www.paypal.com/donate"
+            method="post"
+            target="_blank"
+            style="margin-top: 20px;"
+            onsubmit="return preparePayPalForm()">
+
+            <!-- PayPal required hidden fields -->
+            <input type="hidden" name="hosted_button_id" value="WLH7PLQ9R3TFS" />
+
+            <!-- Pre-fill amount into PayPal (supported by hosted buttons) -->
+            <input type="hidden" name="amount" id="paypal-amount" value="25" />
+
+            <!-- PayPal tracking pixel (required) -->
+            <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" style="display:none;" />
+
+            <!-- On-brand submit button replaces default PayPal image -->
+            <button
+              type="submit"
+              class="btn-primary btn-rose"
+              style="width:100%; justify-content:center; font-size:16px; padding:16px; border:none; cursor:pointer;">
+              💝 Complete Your Gift via PayPal
+            </button>
+          </form>
+
+          <!-- Trust signals -->
+          <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-top:14px; flex-wrap:wrap;">
+            <span style="font-size:11.5px; color:var(--ink-muted);">🔒 Secured by PayPal</span>
+            <span style="color:var(--rule);">|</span>
+            <span style="font-size:11.5px; color:var(--ink-muted);">No PayPal account required</span>
+            <span style="color:var(--rule);">|</span>
+            <span style="font-size:11.5px; color:var(--ink-muted);">Every gift helps</span>
           </div>
-          <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" placeholder="your@email.com">
-          </div>
-          <div style="margin-top: 8px;">
-            <button class="btn-primary btn-rose" style="width:100%; justify-content:center; font-size:16px; padding: 16px;">💝 Complete Your Gift</button>
-          </div>
-          <p style="font-size: 11.5px; color: var(--ink-muted); text-align: center; margin-top: 12px;">Secure. Confidential. Every gift helps.</p>
         </div>
         <div>
           <span class="section-label">Your Impact</span>
@@ -2081,7 +2109,7 @@ footer {
             <label>How Can We Help?</label>
             <textarea placeholder="Tell us what's on your mind. There's no wrong thing to say."></textarea>
           </div>
-          <button class="btn-primary" style="width:100%; justify-content:center;">Send Message →</button>
+          <button class="btn-primary" style="width:100%; justify-content:center;" onclick="sendContactMessage()">Send Message →</button>
           <p style="font-size: 12px; color: var(--ink-muted); text-align: center; margin-top: 12px;">You do not have to take the next step alone.</p>
         </div>
         <div>
@@ -2089,7 +2117,7 @@ footer {
             <h3>Get in Touch</h3>
             <div class="contact-row">
               <div class="contact-row-icon">✉️</div>
-              <div><strong style="display:block; margin-bottom:2px; color:var(--ink);">Email</strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="aac3c4ccc5eac8d8c3cecdc3c4cdc2cfcbd8ded9c4c284c5d8cd">[email&#160;protected]</a></div>
+              <div><strong style="display:block; margin-bottom:2px; color:var(--ink);">Email</strong><a href="mailto:info@bridgingheartsbereavement.org" style="color:var(--teal); text-decoration:none;">info@bridgingheartsbereavement.org</a></div>
             </div>
             <div class="contact-row">
               <div class="contact-row-icon">📞</div>
@@ -2152,7 +2180,7 @@ footer {
       </div>
       <div class="footer-col">
         <h4>Support</h4>
-        <a><span class="__cf_email__" data-cfemail="cfa6a1a9a08fadbda6aba8a6a1a8a7aaaebdbbbca1a7e1a0bda8">[email&#160;protected]</span></a>
+        <a href="mailto:info@bridgingheartsbereavement.org" style="color:rgba(255,255,255,0.45);">info@bridgingheartsbereavement.org</a>
         <a>New Hampshire</a>
         <a>Privacy Policy</a>
         <a>Accessibility</a>
@@ -2234,10 +2262,57 @@ window.showPage = function(id) {
   if (target && sticky) target.appendChild(sticky);
 };
 
-// Donation amount selector
+// Donation amount selector — wired to PayPal form
 window.selectAmount = function(btn) {
   document.querySelectorAll('.amount-btn').forEach(function(b) { b.classList.remove('selected'); });
   btn.classList.add('selected');
+
+  var amount = btn.getAttribute('data-amount');
+  var customWrap = document.getElementById('custom-amount-wrap');
+  var paypalAmount = document.getElementById('paypal-amount');
+
+  if (amount === 'other') {
+    customWrap.style.display = 'block';
+    paypalAmount.value = '';
+    document.getElementById('custom-amount').focus();
+  } else {
+    customWrap.style.display = 'none';
+    if (paypalAmount) paypalAmount.value = amount;
+  }
+};
+
+// Contact form — opens pre-filled mailto in default email app
+window.sendContactMessage = function() {
+  var name    = document.querySelector('#page-contact input[type="text"]').value.trim();
+  var email   = document.querySelector('#page-contact input[type="email"]').value.trim();
+  var message = document.querySelector('#page-contact textarea').value.trim();
+
+  if (!name && !message) {
+    // Allow sending even if fields are empty — don't block someone reaching out
+  }
+
+  var subject = encodeURIComponent('Message from Bridging Hearts Website' + (name ? ' — ' + name : ''));
+  var body    = encodeURIComponent(
+    (name    ? 'Name: '    + name    + '\n' : '') +
+    (email   ? 'Email: '  + email   + '\n' : '') +
+    (message ? '\nMessage:\n' + message : '')
+  );
+
+  window.location.href = 'mailto:info@bridgingheartsbereavement.org?subject=' + subject + '&body=' + body;
+};
+window.preparePayPalForm = function() {
+  var selectedBtn = document.querySelector('.amount-btn.selected');
+  var paypalAmount = document.getElementById('paypal-amount');
+
+  if (selectedBtn && selectedBtn.getAttribute('data-amount') === 'other') {
+    var custom = document.getElementById('custom-amount').value;
+    if (!custom || isNaN(custom) || parseFloat(custom) < 1) {
+      alert('Please enter a donation amount greater than $1.');
+      return false;
+    }
+    paypalAmount.value = parseFloat(custom).toFixed(2);
+  }
+  return true; // allow form submission
 };
 
 // ══════════════════════════════════════
