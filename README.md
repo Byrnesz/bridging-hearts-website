@@ -8,7 +8,14 @@
 
 ## 🌐 Live Site
 
+This repository is published as a GitHub Page.
+Once activated, the site will be available at:
 
+```
+https://yourusername.github.io/bridging-hearts-website/
+```
+
+> Replace `yourusername` and `bridging-hearts-website` with your actual GitHub username and repository name.
 
 ```
 
